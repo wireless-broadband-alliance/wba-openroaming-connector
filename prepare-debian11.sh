@@ -47,6 +47,7 @@ cd /root/openroaming-oss/
 
 echo "Next steps:"
 echo "1 - Run the command 'nano /root/openroaming-oss/configs/radsecproxy/radsecproxy.conf' and change the IP address and secret according to the documentation"
-echo "2 -  Run the command 'docker-compose up -d' and you should be up and running"
+echo "2 - Before starting the service make sure your cert-chain.pem was generated correctly, refer to the documentation for images of how it should look like (you can open the file the same way as the step before 'nano /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem')"
+echo "3 - Run the command 'docker-compose up -d' and you should be up and running"
 
 echo "Reminder: Make sure UDP ports 1812 and 1813, and TCP port 2083 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

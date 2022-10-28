@@ -1,7 +1,8 @@
 #!/bin/bash
 # This script is meant for quick & easy install via:
 #   $ curl -fsSL https://raw.githubusercontent.com/wireless-broadband-alliance/openroaming-oss/main/prepare-debian11.sh -o prepare-debian11.sh
-#   $ sh prepare-debian11.sh
+#   $ chmod +x prepare-debian11.sh
+#   $ ./prepare-debian11.sh
 
 if [ "$EUID" -ne 0 ]
   then echo "You must run this script as root, you can either sudo the script directly or become root with a command such as 'sudo su'"
@@ -11,7 +12,7 @@ fi
 if [[ ! -f "/root/private_key.pem" ]]
 then
     echo "Please upload your certificate private key to /root/private_key.pem"
-    echo "Please make sure the file is named as /root/private_key.pem"
+    echo "Please make sure the file is named as private_key.pem"
     exit 1
 fi
 
@@ -25,7 +26,7 @@ fi
 
 # Install dependencies
 apt-get update -y
-apt get install curl wget nano git python3 python3-pip -y
+apt-get install curl wget nano git python3 python3-pip -y
 
 #Install Docker and Docker Compose
 curl -fsSL https://get.docker.com -o get-docker.sh

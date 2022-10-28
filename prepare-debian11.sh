@@ -40,7 +40,7 @@ git clone https://github.com/wireless-broadband-alliance/openroaming-oss.git
 cd /root/openroaming-oss/configs/radsecproxy/certs/chain
 mv /root/private_key.pem /root/openroaming-oss/configs/radsecproxy/certs/private_key.pem
 mv /root/or-client.cer /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer
-cat /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_Kyrio_Issuing_CA.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem > root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
+cat /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_Kyrio_Issuing_CA.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem > /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
 
 # ready workdir
 cd /root/openroaming-oss/

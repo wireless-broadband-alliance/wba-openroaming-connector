@@ -14,3 +14,15 @@ services:
     environment:
       - RUN_IN_BACKGROUND=false
     restart: always
+
+  freeradius:
+    build:
+      dockerfile: DockerfileFreeRadius
+      context: .
+    command: ["radiusd", "-f", "-l", "/dev/stdout"]
+    volumes:
+      - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
+#    command:
+#      - -X
+    ports:
+      - "1812:1812"

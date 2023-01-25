@@ -1,0 +1,17 @@
+FROM freeradius/freeradius-server:3.2.1
+
+COPY configs/freeradius/site-config/tls /etc/freeradius/sites-enabled/tls
+COPY configs/freeradius/site-config/tls /etc/freeradius/sites-available/tls
+
+
+COPY configs/radsecproxy/certs /etc/freeradius/certs
+RUN chmod -R 600 /etc/freeradius/sites-enabled
+RUN chmod -R 600 /etc/freeradius/sites-available
+RUN chown freerad:freerad /etc/freeradius/certs/or-client.cer
+RUN chown freerad:freerad /etc/freeradius/certs/private_key.pem
+RUN chown freerad:freerad /etc/freeradius/certs/chain/WBA_OpenRoaming_Root.pem
+RUN chown -R freerad:freerad /etc/freeradius/sites-enabled
+RUN chown -R freerad:freerad /etc/freeradius/sites-available
+RUN chmod 600 /etc/freeradius/certs/private_key.pem
+RUN chmod 600 /etc/freeradius/certs/or-client.cer
+RUN chmod 600 /etc/freeradius/certs/chain/WBA_OpenRoaming_Root.pem

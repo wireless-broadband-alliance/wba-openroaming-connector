@@ -3,7 +3,6 @@ version: '3.2'
 services:
 
   radsecproxy:
-    network_mode: host
     build:
       dockerfile: Dockerfile
       context: .
@@ -20,9 +19,12 @@ services:
       dockerfile: DockerfileFreeRadius
       context: .
     command: ["radiusd", "-f", "-l", "/dev/stdout"]
+    depends_on:
+      - radsecproxy
     volumes:
       - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
 #    command:
 #      - -X
     ports:
       - "1812:1812"
+      - "1813:1813"

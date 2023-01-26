@@ -5,6 +5,7 @@ COPY configs/freeradius/site-config/tls /etc/freeradius/sites-available/tls
 
 
 COPY configs/radsecproxy/certs /etc/freeradius/certs
+COPY configs/freeradius/proxy.conf /etc/freeradius/proxy.conf
 RUN chmod -R 600 /etc/freeradius/sites-enabled
 RUN chmod -R 600 /etc/freeradius/sites-available
 RUN chown freerad:freerad /etc/freeradius/certs/or-client.cer

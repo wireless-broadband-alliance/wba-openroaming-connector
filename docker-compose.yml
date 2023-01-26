@@ -14,7 +14,7 @@ services:
       - RUN_IN_BACKGROUND=false
     restart: always
     ports:
-      - "2083:2083"
+      - "2083:2083/tcp"
 
   freeradius:
     build:
@@ -28,5 +28,7 @@ services:
 #    command:
 #      - -X
     ports:
-      - "1812:1812"
-      - "1813:1813"
+      - "1812:1812/tcp"
+      - "1812:1812/udp"
+      - "1813:1813/tcp"
+      - "1813:1813/udp"

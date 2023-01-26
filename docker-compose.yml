@@ -14,8 +14,7 @@ services:
       - RUN_IN_BACKGROUND=false
     restart: always
     ports:
-      - "11813:11813"
-      - "11812:11812"
+      - "2083:2083"
 
   freeradius:
     build:
@@ -31,4 +30,3 @@ services:
     ports:
       - "1812:1812"
       - "1813:1813"
-      - "2083:2083"

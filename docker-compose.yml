@@ -24,7 +24,7 @@ services:
     build:
       dockerfile: DockerfileFreeRadius
       context: .
-    command: ["radiusd", "-f", "-l", "/dev/stdout", "-X"]
+    command: ["radiusd", "-f", "-l", "/dev/stdout", "-xx"]
     depends_on:
       - radsecproxy
     volumes:

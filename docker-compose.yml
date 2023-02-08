@@ -23,27 +23,32 @@ services:
   mysql:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: radius 
+      MYSQL_DATABASE: radius
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./configs/mysql/schema/freeradius.sql:/docker-entrypoint-initdb.d/freeradius.sql
 
   freeradius:
     build:
       dockerfile: DockerfileFreeRadius
       context: .
-    command: ["radiusd", "-f", "-l", "/dev/stdout", "-xx"]
+    command: [ "radiusd", "-f", "-l", "/dev/stdout", "-xx" ]
     depends_on:
       - radsecproxy
       - mysql
     volumes:
       - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
-#    command:
-#      - -X
+    #    command:
+    #      - -X
     ports:
       - "1812:1812/tcp"
       - "1812:1812/udp"
       - "1813:1813/tcp"
       - "1813:1813/udp"
+volumes:
+  mysql_data:

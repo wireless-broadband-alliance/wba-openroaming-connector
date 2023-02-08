@@ -20,6 +20,16 @@ services:
       - "11813:11813/tcp"
       - "11813:11813/udp"
 
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: radius 
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+
   freeradius:
     build:
       dockerfile: DockerfileFreeRadius
@@ -27,6 +37,7 @@ services:
     command: ["radiusd", "-f", "-l", "/dev/stdout", "-xx"]
     depends_on:
       - radsecproxy
+      - mysql
     volumes:
       - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
 #    command:

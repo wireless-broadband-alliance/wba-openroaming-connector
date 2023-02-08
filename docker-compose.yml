@@ -43,6 +43,7 @@ services:
       - mysql
     volumes:
       - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
+      - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
     #    command:
     #      - -X
     ports:

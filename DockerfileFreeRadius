@@ -9,11 +9,11 @@ COPY configs/freeradius/proxy.conf /etc/freeradius/proxy.conf
 COPY configs/freeradius/clients.conf /etc/freeradius/clients.conf
 RUN chmod -R 600 /etc/freeradius/sites-enabled
 RUN chmod -R 600 /etc/freeradius/sites-available
-RUN chown freerad:freerad /etc/freeradius/certs/or-client.cer
-RUN chown freerad:freerad /etc/freeradius/certs/private_key.pem
-RUN chown freerad:freerad /etc/freeradius/certs/chain/WBA_OpenRoaming_Root.pem
+RUN chown freerad:freerad /etc/freeradius/certs/cert.pem
+RUN chown freerad:freerad /etc/freeradius/certs/privkey.pem
+RUN chown freerad:freerad /etc/freeradius/certs/fullchain.pem
 RUN chown -R freerad:freerad /etc/freeradius/sites-enabled
 RUN chown -R freerad:freerad /etc/freeradius/sites-available
-RUN chmod 600 /etc/freeradius/certs/private_key.pem
-RUN chmod 600 /etc/freeradius/certs/or-client.cer
-RUN chmod 600 /etc/freeradius/certs/chain/WBA_OpenRoaming_Root.pem
+RUN chmod 600 /etc/freeradius/certs/privkey.pem
+RUN chmod 600 /etc/freeradius/certs/cert.pem
+RUN chmod 600 /etc/freeradius/certs/fullchain.pem

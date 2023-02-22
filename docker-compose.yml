@@ -15,6 +15,7 @@ services:
     restart: always
     ports:
       - "2083:2083/tcp"
+      - "2083:2083/udp"
       - "11812:11812/tcp"
       - "11812:11812/udp"
       - "11813:11813/tcp"

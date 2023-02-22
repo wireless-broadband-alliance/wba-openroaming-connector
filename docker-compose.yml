@@ -9,6 +9,7 @@ services:
     volumes:
       - "./configs/radsecproxy/radsecproxy.conf:/etc/radsecproxy.conf"
       - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
+      -
 
     environment:
       - RUN_IN_BACKGROUND=false
@@ -34,6 +35,7 @@ services:
       - ./configs/mysql/schema/freeradius.sql:/docker-entrypoint-initdb.d/freeradius.sql
 
   freeradius:
+    restart: always
     build:
       dockerfile: DockerfileFreeRadius
       context: .

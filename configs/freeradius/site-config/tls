@@ -161,11 +161,11 @@ listen {
 	#
 	tls {
 		#private_key_password = whatever
-		private_key_file = ${certdir}/private_key.pem
+		private_key_file = ${certdir}/privkey.pem
 
 		# Accept an expired Certificate Revocation List
 		#
-	#	allow_expired_crl = no
+	#	allow_expired_crl = yes
 
 		#  If Private key & Certificate are located in
 		#  the same file, then private_key_file &
@@ -177,7 +177,7 @@ listen {
 		#  only the server certificate, but ALSO all
 		#  of the CA certificates used to sign the
 		#  server certificate.
-		certificate_file = ${certdir}/or-client.cer
+		certificate_file = ${certdir}/cert.pem
 
 		#  Trusted Root CA list
 		#
@@ -194,7 +194,7 @@ listen {
 		#  not use client certificates, and you do not want
 		#  to permit EAP-TLS authentication, then delete
 		#  this configuration item.
-		ca_file = ${certdir}/chain/WBA_OpenRoaming_Root.pem
+		ca_file = ${certdir}/fullchain.pem
 
 		#  For DH cipher suites to work in OpenSSL < 1.1.0,
 		#  you have to run OpenSSL to create the DH file
@@ -557,7 +557,7 @@ home_server tls {
 	#	hostname = "example.com"
 
 		#private_key_password = whatever
-		private_key_file = ${certdir}/private_key.pem
+		private_key_file = ${certdir}/privkey.pem
 
 		#  If Private key & Certificate are located in
 		#  the same file, then private_key_file &
@@ -569,7 +569,7 @@ home_server tls {
 		#  only the server certificate, but ALSO all
 		#  of the CA certificates used to sign the
 		#  server certificate.
-		certificate_file = ${certdir}/or-client.cer
+		certificate_file = ${certdir}/cert.pem
 
 		#  Trusted Root CA list
 		#
@@ -586,7 +586,7 @@ home_server tls {
 		#  not use client certificates, and you do not want
 		#  to permit EAP-TLS authentication, then delete
 		#  this configuration item.
-		ca_file = ${certdir}/chain/WBA_OpenRoaming_Root.pem
+		ca_file = ${certdir}/fullchain.pem
 
 		#
 		#  Before version 3.2.1, outbound RadSec connections

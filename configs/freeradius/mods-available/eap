@@ -212,7 +212,7 @@ eap {
 		#  give advice which will work everywhere.  Instead,
 		#  we give general guidelines.
 		#
-		certificate_file = ${certdir}/fullchain.pem
+		certificate_file = ${certdir}/cert.pem
 
 		#  Trusted Root CA list
 		#
@@ -225,7 +225,7 @@ eap {
 		#  In that case, this CA file should contain
 		#  *one* CA certificate.
 		#
-		ca_file = ${cadir}/ca.pem
+		ca_file = ${certdir}/fullchain.pem
 
 	 	#  OpenSSL will automatically create certificate chains,
 	 	#  unless we tell it to not do that.  The problem is that

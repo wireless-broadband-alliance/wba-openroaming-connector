@@ -9,7 +9,6 @@ services:
     volumes:
       - "./configs/radsecproxy/radsecproxy.conf:/etc/radsecproxy.conf"
       - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
-      -
 
     environment:
       - RUN_IN_BACKGROUND=false

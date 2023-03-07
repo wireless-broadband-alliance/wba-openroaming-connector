@@ -42,8 +42,8 @@ rm -rf /root/openroaming-oss/configs/radsecproxy/certs/private_key.pem
 rm -rf /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer
 rm -rf /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
 mv /root/private_key.pem /root/openroaming-oss/configs/radsecproxy/certs/private_key.pem
-mv /root/or-client.cer /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer
-mv /root/chain.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
+mv /root/or-client.pem /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer
+mv /root/cert-chain.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
 
 # ready workdir
 cd /root/openroaming-oss/

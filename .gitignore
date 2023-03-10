@@ -1,4 +1,4 @@
 configs/radsecproxy/certs/chain/cert-chain.pem
-configs/radsecproxy/certs/private_key.pem
+configs/radsecproxy/certs/*.pem
 configs/radsecproxy/certs/*.cer
 .idea

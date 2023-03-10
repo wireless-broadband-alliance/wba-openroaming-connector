@@ -42,8 +42,8 @@ rm -rf /root/openroaming-oss/configs/radsecproxy/certs/private_key.pem
 rm -rf /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer
 rm -rf /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
 mv /root/private_key.pem /root/openroaming-oss/configs/radsecproxy/certs/private_key.pem
-mv /root/or_client.pem /root/openroaming-oss/configs/radsecproxy/certs/or-client.cer
-mv /root/cert-chain.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
+mv /root/or_client.pem /root/openroaming-oss/configs/radsecproxy/certs/or-client.pem
+cat /root/openroaming-oss/configs/radsecproxy/certs/or-client.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_Kyrio_Issuing_CA.pem /root/openroaming-oss/configs/radsecproxy/certs/chain/WBA_OpenRoaming_Root.pem > /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem
 
 # ready workdir
 cd /root/openroaming-oss/
@@ -54,8 +54,8 @@ echo " =============================================="
 
 echo "Next steps:"
 echo "1 - Run the command 'nano /root/openroaming-oss/configs/radsecproxy/radsecproxy.conf' and update the IP address and secret according to the documentation"
-echo "2 - Before starting the service make sure your cert-chain.pem was generated correctly, refer to the documentation for images of how it should look like (you can open the file the same way as the step before 'nano /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem')"
+echo "2 - [LEGANCY, YOU PROBABLY CAN DISREGARD] Before starting the service make sure your cert-chain.pem was generated correctly, refer to the documentation for images of how it should look like (you can open the file the same way as the step before 'nano /root/openroaming-oss/configs/radsecproxy/certs/chain/cert-chain.pem')"
 echo "3 - Run the command 'cd /root/openroaming-oss/' to make sure you are on the correct folder"
 echo "4 - Run the command 'docker-compose up -d' and you should be up and running"
 
-echo "Reminder: Make sure UDP ports 1812 and 1813, and TCP port 2083 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"
+echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

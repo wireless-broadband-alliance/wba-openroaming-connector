@@ -1,0 +1,123 @@
+#
+#	This file gives an example of using Challenge-Response
+#
+#	In this example, the user logs in with a password, which has
+#	to be "hello".  The server will send them a challenge
+#	consisting of a random number 0..9.  The user has to respond
+#	with that number.
+#
+#
+#	$Id: c3aeb0865bbfc52be9690e396196b89a2e1ae761 $
+#
+listen {
+	type = auth
+	ipaddr = *
+	port = 2000
+	virtual_server = challenge
+}
+
+server challenge {
+authorize {
+	#
+	#  OTP requires a password.
+	#
+	if (!User-Password) {
+		reject
+	}
+
+	#
+	#  If there's no State attribute, then this is the first
+	#  request from the user.
+	#
+	if (!State) {
+		#
+		#  Set the authentication to use step 1.
+		update control {
+			Auth-Type := Step1
+
+			#
+			#  For testing we will just set the password to "hello".
+			#
+			#  Normally the password comes from "ldap" or "sql".
+			#
+			Cleartext-Password := "hello"
+
+#			ldap
+#			sql
+#			...
+		}
+	}
+	else {
+		#
+		#  Check that the password looks like an OTP
+		#
+		if (User-Password !~ /[0-9]{6}/) {
+			reject
+		}
+
+		#
+		#  Set the authentication to use step 2.
+		#  Set the "known good" password to the number
+		#  saved in the session-state list.
+		#
+		update control {
+			Auth-Type := Step2
+
+			#
+			#  For testing, ensure that the user enters the same password.
+			#
+			#  Normally this section should look up a TOTP-Secret, and
+			#
+			Cleartext-Password := &session-state:Tmp-Integer-0
+
+			#
+			#  Normally this section should also set &control:TOTP-Secret, too.
+			#
+			TOTP-Password := &User-Password
+		}
+	}
+}
+
+authenticate {
+	Auth-Type Step1 {
+		#  If the password doesn't match, the user is rejected
+		#  immediately.
+		pap
+
+		#
+		#  For testing, just use a 6 digit random OTP.
+		#
+		update session-state {
+			Tmp-Integer-0 := "%{randstr:nnnnnn}"
+		}
+
+		#
+		#  For testing, tell the user what OTP to enter.
+		#
+		#  Don't do this in production...
+		#
+		update reply {
+			Reply-Message := "Please enter OTP %{session-state:Tmp-Integer-0}"
+		}
+
+		#
+		#  Send an Access-Challenge.
+		#  See raddb/policy.d/control for the definition
+		#  of "challenge"
+		#
+		challenge
+	}
+
+	Auth-Type Step2 {
+		#
+		#  For testing, do PAP authentication with the password.
+		#
+		pap
+
+		#
+		#  Normally you'd do TOTP checks via the TOTP module.
+		#
+#		totp
+	}
+}
+}

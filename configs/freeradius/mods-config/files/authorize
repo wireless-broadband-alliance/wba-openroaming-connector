@@ -1,1 +1,1 @@
-bob	Cleartext-Password := "test"
+DEFAULT Auth-Type := PAP

@@ -1,0 +1,64 @@
+<CarrierProvisioning xmlns="http://www.microsoft.com/networking/CarrierControl/v1"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WLANProfiles>
+    <WLANProfile xmlns="http://www.microsoft.com/networking/CarrierControl/WLAN/v1">
+      <name>Profile Tap Windows</name>
+  <Hotspot2>
+      <DomainName>openroaming.tetrapi.pt</DomainName>
+      <NAIRealm>
+        <name>Profile Tap for Windows</name>
+      </NAIRealm>
+</Hotspot2>
+    <MSM>
+      <security>
+        <authEncryption>
+          <authentication>WPA2</authentication>
+          <encryption>AES</encryption>
+          <useOneX>true</useOneX>
+        </authEncryption>
+        <OneX xmlns="http://www.microsoft.com/networking/OneX/v1">
+          <authMode>user</authMode>
+          <EAPConfig>
+            <EapHostConfig xmlns="http://www.microsoft.com/provisioning/EapHostConfig">
+              <EapMethod>
+                <Type xmlns="http://www.microsoft.com/provisioning/EapCommon">21</Type>
+                <VendorId xmlns="http://www.microsoft.com/provisioning/EapCommon">0</VendorId>
+                <VendorType xmlns="http://www.microsoft.com/provisioning/EapCommon">0</VendorType>
+                <AuthorId xmlns="http://www.microsoft.com/provisioning/EapCommon">311</AuthorId>
+              </EapMethod>
+              <Config>
+                <EapTtls xmlns="http://www.microsoft.com/provisioning/EapTtlsConnectionPropertiesV1">
+                  <ServerValidation>
+                    <DisablePrompt>false</DisablePrompt>
+                  </ServerValidation>
+                  <Phase2Authentication>
+                    <MSCHAPAuthentication/>
+                  </Phase2Authentication>
+                  <Phase1Identity>
+                    <IdentityPrivacy>true</IdentityPrivacy>
+                  </Phase1Identity>
+                </EapTtls>
+              </Config>
+            </EapHostConfig>
+          </EAPConfig>
+        </OneX>
+        <EapHostUserCredentials xmlns="http://www.microsoft.com/provisioning/EapHostUserCredentials"
+          xmlns:baseEap="http://www.microsoft.com/provisioning/BaseEapMethodUserCredentials"
+          xmlns:eapCommon="http://www.microsoft.com/provisioning/EapCommon">
+          <EapMethod>
+            <eapCommon:Type>21</eapCommon:Type>
+            <eapCommon:AuthorId>311</eapCommon:AuthorId>
+          </EapMethod>
+          <Credentials>
+            <EapTtls xmlns="http://www.microsoft.com/provisioning/EapTtlsUserPropertiesV1">
+              <Username>tap@tetrapi.pt</Username>
+              <Password>59195c6c541c8307f1da2d1e768d6f2280c984df217ad5f4c64c3542b04111a4</Password>
+            </EapTtls>
+          </Credentials>
+        </EapHostUserCredentials>
+      </security>
+    </MSM>
+  </WLANProfile>
+</WLANProfiles>
+</CarrierProvisioning>

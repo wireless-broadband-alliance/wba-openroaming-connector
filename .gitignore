@@ -1,4 +1,2 @@
-configs/radsecproxy/certs/chain/cert-chain.pem
-configs/radsecproxy/certs/*.pem
-configs/radsecproxy/certs/*.cer
 .idea
+hybrid/certs/wba/*.pem

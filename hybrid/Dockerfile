@@ -67,7 +67,7 @@ EXPOSE 1813
 
 # Set Tini entrypoint
 ENTRYPOINT ["/sbin/tini", "--"]
-COPY ./configs/radsecproxy/naptr-openroaming.sh /etc/radsecproxy/naptr-openroaming.sh
+COPY configs/radsecproxy/naptr-openroaming.sh /etc/radsecproxy/naptr-openroaming.sh
 RUN chmod +x /etc/radsecproxy/naptr-openroaming.sh
 # Start Radsecproxy
 CMD ["/root/start.sh"]

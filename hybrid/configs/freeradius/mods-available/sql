@@ -166,8 +166,8 @@ sql {
 	#
 	server = "mysql"
 	port = 3306
-	login = "admin"
-	password = "admin"
+	login = "-RSQLUSER-"
+	password = "-RSQLPASS-"
 
 	# Connection info for Mongo
 	# Authentication Without SSL

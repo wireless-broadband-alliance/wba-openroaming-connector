@@ -9,13 +9,10 @@ services:
     volumes:
       - "./configs/radsecproxy/radsecproxy.conf:/etc/radsecproxy.conf"
       - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
-
     environment:
       - RUN_IN_BACKGROUND=false
     restart: always
     ports:
-      - "2083:2083/tcp"
-      - "2083:2083/udp"
       - "11812:11812/tcp"
       - "11812:11812/udp"
       - "11813:11813/tcp"
@@ -25,9 +22,9 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: radius
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -49,10 +46,5 @@ services:
       - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
     #    command:
     #      - -X
-    ports:
-      - "1812:1812/tcp"
-      - "1812:1812/udp"
-      - "1813:1813/tcp"
-      - "1813:1813/udp"
 volumes:
   mysql_data:

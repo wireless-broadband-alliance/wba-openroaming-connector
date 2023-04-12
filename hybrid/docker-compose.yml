@@ -9,13 +9,10 @@ services:
     volumes:
       - "./configs/radsecproxy/radsecproxy.conf:/etc/radsecproxy.conf"
       - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
-
     environment:
       - RUN_IN_BACKGROUND=false
     restart: always
     ports:
-      - "2083:2083/tcp"
-      - "2083:2083/udp"
       - "11812:11812/tcp"
       - "11812:11812/udp"
       - "11813:11813/tcp"
@@ -34,25 +31,20 @@ services:
       - mysql_data:/var/lib/mysql
       - ./configs/mysql/schema/freeradius.sql:/docker-entrypoint-initdb.d/freeradius.sql
 
-  freeradius:
-    restart: always
-    build:
-      dockerfile: DockerfileFreeRadius
-      context: .
-    command: [ "radiusd", "-f", "-l", "/dev/stdout", "-xx" ]
-    depends_on:
-      - radsecproxy
-      - mysql
-    volumes:
-      - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
-      - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
-      - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
-    #    command:
-    #      - -X
-    ports:
-      - "1812:1812/tcp"
-      - "1812:1812/udp"
-      - "1813:1813/tcp"
-      - "1813:1813/udp"
+#  freeradius:
+#    restart: always
+#    build:
+#      dockerfile: DockerfileFreeRadius
+#      context: .
+#    command: [ "radiusd", "-f", "-l", "/dev/stdout", "-xx" ]
+#    depends_on:
+#      - radsecproxy
+#      - mysql
+#    volumes:
+#      - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
+#      - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
+#      - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
+#    #    command:
+#    #      - -X
 volumes:
   mysql_data:

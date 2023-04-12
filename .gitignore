@@ -1,2 +1,4 @@
 .idea
-hybrid/certs/wba/*.pem
+certs/wba/*.pem
+
+hybrid/configs/radsecproxy/certs/*.pem

@@ -19,9 +19,9 @@ then
 fi
 
 
-if [[ ! -f "$CERTS_PATH/wba/client.cer" ]]
+if [[ ! -f "$CERTS_PATH/wba/client.pem" ]]
 then
-    echo "Please upload your OpenRoaming certificate to $CERTS_PATH/wba/client.cer"
+    echo "Please upload your OpenRoaming certificate to $CERTS_PATH/wba/client.pem"
     exit 1
 fi
 
@@ -40,8 +40,9 @@ git clone $REPO_URL
 # Prepare certificates
 cd /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain
 rm -rf /root/openroaming-oss/hybrid/configs/radsecproxy/certs/key.pem
-rm -rf /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.cer
+rm -rf /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem
 rm -rf /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain.pem
+#Prepare RadSec Certs
 cp $CERTS_PATH/wba/key.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/key.pem
 cp $CERTS_PATH/wba/client.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem
 cat /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_Kyrio_Issuing_CA.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_OpenRoaming_Root.pem > /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain.pem

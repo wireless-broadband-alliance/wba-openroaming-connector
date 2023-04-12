@@ -2,3 +2,9 @@
 certs/wba/*.pem
 
 hybrid/configs/radsecproxy/certs/*.pem
+
+certs/freeradius/*.pem
+
+hybrid/configs/freeradius/certs/*.pem
+
+hybrid/.env

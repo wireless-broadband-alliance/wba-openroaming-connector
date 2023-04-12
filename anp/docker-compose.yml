@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+
+  radsecproxy:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - "./configs/radsecproxy/radsecproxy.conf:/etc/radsecproxy.conf"
+      - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
+    environment:
+      - RUN_IN_BACKGROUND=false
+    restart: always
+    ports:
+      - "11812:11812/tcp"
+      - "11812:11812/udp"
+      - "11813:11813/tcp"
+      - "11813:11813/udp"

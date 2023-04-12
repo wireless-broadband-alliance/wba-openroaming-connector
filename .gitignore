@@ -8,3 +8,5 @@ certs/freeradius/*.pem
 hybrid/configs/freeradius/certs/*.pem
 
 hybrid/.env
+
+anp/configs/radsecproxy/certs/*.pem

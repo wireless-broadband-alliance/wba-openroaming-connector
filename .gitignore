@@ -1,12 +1,9 @@
 .idea
 certs/wba/*.pem
-
 hybrid/configs/radsecproxy/certs/*.pem
-
 certs/freeradius/*.pem
-
 hybrid/configs/freeradius/certs/*.pem
-
+idp/configs/freeradius/certs/*.pem
 hybrid/.env
-
+idp/.env
 anp/configs/radsecproxy/certs/*.pem

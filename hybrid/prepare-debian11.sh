@@ -31,7 +31,27 @@ read -p "Enter the client CIDR (default: 0.0.0.0/0): " client_cidr
 client_cidr=${client_cidr:-0.0.0.0/0}
 read -p "Enter the client secret (default: radsec): " client_secret
 client_secret=${client_secret:-radsec}
+read -p "Enter MySQL root password [admin]: " MYSQL_ROOT_PASSWORD
+MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-admin}
 
+# Prompt for MySQL user name
+read -p "Enter MySQL user name [admin]: " MYSQL_USER
+MYSQL_USER=${MYSQL_USER:-admin}
+
+# Prompt for MySQL password
+read -p "Enter MySQL password [admin]: " MYSQL_PASSWORD
+MYSQL_PASSWORD=${MYSQL_PASSWORD:-admin}
+
+# Save the values to a .env file
+cat > .env <<EOL
+MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+MYSQL_USER=${MYSQL_USER}
+MYSQL_PASSWORD=${MYSQL_PASSWORD}
+EOL
+
+# Replace placeholders in the sql file
+sed -i "s/-RSQLUSER-/${mysql_user}/g" /root/openroaming-oss/hybrid/configs/freeradius/mods-available/sql
+sed -i "s/-RSQLPASS-/${mysql_password}/g" /root/openroaming-oss/hybrid/configs/freeradius/mods-available/sql
 
 # Install dependencies
 apt-get update -y

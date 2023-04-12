@@ -25,6 +25,27 @@ then
     exit 1
 fi
 
+if [[ ! -f "$CERTS_PATH/freeradius/cert.pem" ]]
+then
+    echo "Please upload your FreeRadius (LetsEncrypt) certificate to $CERTS_PATH/freeradius/cert.pem"
+    exit 1
+fi
+if [[ ! -f "$CERTS_PATH/freeradius/chain.pem" ]]
+then
+    echo "Please upload your FreeRadius (LetsEncrypt) chain to $CERTS_PATH/freeradius/chain.pem"
+    exit 1
+fi
+if [[ ! -f "$CERTS_PATH/freeradius/fullchain.pem" ]]
+then
+    echo "Please upload your FreeRadius (LetsEncrypt) fullchain to $CERTS_PATH/freeradius/fullchain.pem"
+    exit 1
+fi
+if [[ ! -f "$CERTS_PATH/freeradius/privkey.pem" ]]
+then
+    echo "Please upload your FreeRadius (LetsEncrypt) private key to $CERTS_PATH/freeradius/privkey.pem"
+    exit 1
+fi
+
 # Prompt for user input
 read -p "Enter REALM name: " realm_name
 read -p "Enter the client CIDR (default: 0.0.0.0/0): " client_cidr
@@ -57,9 +78,15 @@ sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" /root/openroaming-oss/hybrid/configs/f
 apt-get update -y
 apt-get install curl wget nano git python3 python3-pip -y
 
-#Install Docker and Docker Compose
-curl -fsSL https://get.docker.com -o get-docker.sh
-#sh get-docker.sh
+if ! command -v docker &> /dev/null
+then
+    # Install Docker
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+else
+    echo "Docker is already installed. Skipping installation."
+fi
+
 pip3 install docker-compose
 
 #Prepare the environment

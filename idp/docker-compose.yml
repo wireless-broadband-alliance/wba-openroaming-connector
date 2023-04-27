@@ -1,0 +1,34 @@
+version: '3.2'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: radius
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./configs/mysql/schema/freeradius.sql:/docker-entrypoint-initdb.d/freeradius.sql
+
+  freeradius:
+    restart: always
+    build:
+      dockerfile: DockerfileFreeRadius
+      context: .
+    command: [ "radiusd", "-f", "-l", "/dev/stdout", "-xx" ]
+    depends_on:
+      - radsecproxy
+      - mysql
+    volumes:
+      - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
+      - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
+      - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
+    #    command:
+    #      - -X
+volumes:
+  mysql_data:

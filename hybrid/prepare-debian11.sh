@@ -103,6 +103,7 @@ cp $CERTS_PATH/wba/key.pem /root/openroaming-oss/hybrid/configs/radsecproxy/cert
 cp $CERTS_PATH/wba/client.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem
 cat /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem > /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain.pem
 sed -i "s/-RNAME-/${realm_name//./\\.}/g" /root/openroaming-oss/hybrid/configs/radsecproxy/radsecproxy.conf
+sed -i "s/-RNAME-/${realm_name//./\\.}/g" /root/openroaming-oss/hybrid/configs/freeradius/proxy.conf
 sed -i "s|-RCLIENT-|${client_cidr}|g" /root/openroaming-oss/hybrid/configs/radsecproxy/radsecproxy.conf
 sed -i "s/-RSECRET-/${client_secret}/g" /root/openroaming-oss/hybrid/configs/radsecproxy/radsecproxy.conf
 #Prepare FreeRADIUS Certs

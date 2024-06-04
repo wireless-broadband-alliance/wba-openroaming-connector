@@ -76,7 +76,7 @@ sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" /root/openroaming-oss/hybrid/configs/f
 
 # Install dependencies
 apt-get update -y
-apt-get install curl wget nano git python3 python3-pip -y
+apt-get install curl wget nano git -y
 
 if ! command -v docker &> /dev/null
 then
@@ -86,8 +86,6 @@ then
 else
     echo "Docker is already installed. Skipping installation."
 fi
-
-pip3 install docker-compose
 
 #Prepare the environment
 cd /root
@@ -110,6 +108,6 @@ sed -i "s/-RSECRET-/${client_secret}/g" /root/openroaming-oss/hybrid/configs/rad
 cp $CERTS_PATH/freeradius/*.pem /root/openroaming-oss/hybrid/configs/freeradius/certs
 # ready workdir
 cd /root/openroaming-oss/hybrid/
-docker-compose up -d
+docker compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

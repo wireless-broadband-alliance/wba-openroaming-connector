@@ -18,11 +18,10 @@ automatic Wi-Fi connectivity environment using the OpenRoaming standard.
 For more information about OpenRoaming Technology please visit: https://openroaming.org
 
 ## Prerequisites:
+- Git (optional and highly recommended for easier updates, if the user prefers to clone the repository)
 - Linux based system - Ubuntu 22.04 LTS (tested for the reference implementation)
-- Knowledge about Linux OS (required to setup the project)
-- Docker (required for running the application)
-- Docker compose (responsible for managing multiple containers)
-- Git (optional, if the user prefers to clone the repository)
+- Knowledge about Linux OS (required to set up the project)
+- Docker (required for running the application and managing the multiple containers)
 
 ### How to get the Project
 
@@ -37,7 +36,7 @@ There are two options to retrieve the project:
    repository using the following command:
 
 ```bash
-- git clone <repository-url>
+- git clone https://github.com/wireless-broadband-alliance/wba-openroaming-connector.git
 ```
 
 # ⚙️ Installation Guide

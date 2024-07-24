@@ -56,8 +56,7 @@ realm /.*@example\.com$/ { this is the realm defined on your certificates
 
 ```yaml
 realm example.com {
-  #  If we do not specify a server pool, the realm is LOCAL, and
-  #  requests are not proxied to it.
+
 }
 ```
 
@@ -83,5 +82,5 @@ for port in 11812/tcp 11812/udp 11813/tcp 11813/udp 2083/tcp 2083/udp; do sudo u
 After following all these steps, remember to create the containers and ensure they are working properly. Please run the following command in the terminal:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```

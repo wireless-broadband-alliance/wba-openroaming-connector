@@ -1,6 +1,6 @@
 # ⚙️ Installation Guide
 
-This guide is intended solely to assist in setting up the **OpenRoaming Hybrid Machines** project. It provides
+This guide is intended solely to assist in setting up the **OpenRoaming Connector** project. It provides
 step-by-step instructions for configuring it.
 
 Please follow the instructions below, starting from the **root** folder of the project, to prepare it:

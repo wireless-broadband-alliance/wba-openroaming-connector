@@ -1,6 +1,6 @@
-# 🌐︎ OpenRoaming Hybrid Machines
+# 🌐︎ OpenRoaming Connector
 
-Welcome to the Openroaming Hybrid Machines! This repository offers a **reference implementation to establish an industry baseline** for the necessary components to develop FreeRadius and RadSecProxy machines capable of authenticating Passpoint profiles for Openroaming.
+Welcome to the Openroaming Connector! This repository offers a **reference implementation to establish an industry baseline** for the necessary components to develop FreeRadius and RadSecProxy machines capable of authenticating Passpoint profiles for Openroaming.
 
 ## Why it was created?
 
@@ -11,6 +11,11 @@ The project was developed to simplify the setup process for FreeRadius, RadSecPr
 OpenRoaming is an **open standard developed to enable global, secure, and automatic Wi-Fi connectivity**. With OpenRoaming, users can connect to Wi-Fi networks without being prompted for login credentials, while carrying a unique embedded identity.
 
 The script (prepare-debian11.sh) provided in this project simplifies the setup of FreeRadius, RadSecProxy, and MySQL servers by automating the process of preparing the necessary certificates, realm names, IP addresses, and other required information.
+
+The are currently three possible scenarios:
+- Access Network Provider Connector (ANP)
+- Identity Provider Connector (IDP)
+- Hybrid Connector (combination of ANP and IDP)
 
 The script prompts the user for input and saves the values to a .env file, which is then used to configure the Docker containers for FreeRadius, RadSecProxy, and MySQL. This makes it easy for users to set up a secure and
 automatic Wi-Fi connectivity environment using the OpenRoaming standard.

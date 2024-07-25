@@ -64,11 +64,12 @@ realm example.com {
    docker container and the credentials of the mysql user to be able to edit the radius table.
 
 ```yaml
-server = "hybrid_mysql_1" name of the container of the IP of the current machine
+server = "hybrid_mysql_1"
 port = 3306
 login = "root"
 password = "admin"
 ```
+**Note**: For server property please define the name of the container of the IP of the current machine
 
 6. Next you have to enable the ports being used by the containers on your machine. For Ubuntu server systems, you can
    type the following line.

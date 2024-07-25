@@ -32,18 +32,18 @@ For more information about OpenRoaming Technology please visit: https://openroam
 
 There are two options to retrieve the project:
 
-1. **Download Release Package**: Download the release package from the releases section on GitHub. This package contains
-   only the required components to run,
-   including `.env.sample`, `docker-compose.yml`, and other necessary files.
-
-
-2. **Clone the Repository**: If the user is familiar with Git and want to access the complete source code, can clone the
+1. **Clone the Repository**: If the you are familiar with Git and want to access the complete source code, can clone the
    repository using the following command:
 
 ```bash
 - git clone https://github.com/wireless-broadband-alliance/wba-openroaming-connector.git
 ```
 
+2. **Download Release Package**: Or if you can just download the release package from the releases section on GitHub. This package contains
+   only the required components to run,
+   including `.env.sample`, `docker-compose.yml`, and other necessary files.
+
+   
 # ⚙️ Installation Guide
 
 Follow this link for more information on installing this project: [Installation Guide](INSTALATION.md).

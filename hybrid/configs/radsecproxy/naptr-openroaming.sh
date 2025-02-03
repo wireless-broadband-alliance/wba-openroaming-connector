@@ -79,7 +79,9 @@ if [ -z "${ORIG_REALM}" ]; then
 fi
 
 # for 3gppnetwork we have to do some messing about
-if [[ "${ORIG_REALM}" =~ .(\.3gppnetwork\.org)$ ]] ; then
+if [[ "${ORIG_REALM}" =~ .(\.pub\.3gppnetwork\.org)$ ]] ; then
+    REALM=${ORIG_REALM}
+elif [[ "${ORIG_REALM}" =~ .(\.3gppnetwork\.org)$ ]] ; then
     REALM=$(validate_3gppnetwork ${ORIG_REALM})
 else
     REALM=${ORIG_REALM}

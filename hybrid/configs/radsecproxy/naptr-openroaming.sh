@@ -22,6 +22,10 @@ validate_host() {
          echo ${@} | tr -d '\n\t\r' | grep -E '^[_0-9a-zA-Z][-._0-9a-zA-Z]*$'
 }
 
+validate_3gppnetwork() {
+	echo ${@} |sed -E 's/^(.*)(\.3gppnetwork\.org)$/\1\.pub\2/g'
+}
+
 validate_port() {
          echo ${@} | tr -d '\n\t\r' | grep -E '^[0-9]+$'
 }
@@ -68,10 +72,19 @@ host_it_naptr() {
     done
 }
 
-REALM=$(validate_host ${1})
-if [ -z "${REALM}" ]; then
+ORIG_REALM=$(validate_host ${1})
+if [ -z "${ORIG_REALM}" ]; then
     echo "Error: realm \"${1}\" failed validation"
     usage
+fi
+
+# for 3gppnetwork we have to do some messing about
+if [[ "${ORIG_REALM}" =~ .(\.pub\.3gppnetwork\.org)$ ]] ; then
+    REALM=${ORIG_REALM}
+elif [[ "${ORIG_REALM}" =~ .(\.3gppnetwork\.org)$ ]] ; then
+    REALM=$(validate_3gppnetwork ${ORIG_REALM})
+else
+    REALM=${ORIG_REALM}
 fi
 
 if [ -x "${DIGCMD}" ]; then
@@ -84,7 +97,7 @@ else
 fi
 
 if [ -n "${SERVERS}" ]; then
-    $PRINTCMD "server dynamic_radsec.${REALM} {\n${SERVERS}\n\ttype TLS\n}\n"
+    $PRINTCMD "server dynamic_radsec.${ORIG_REALM} {\n${SERVERS}\n\ttype TLS\n}\n"
     exit 0
 fi
 

@@ -11,7 +11,7 @@ services:
       - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
     environment:
       - RUN_IN_BACKGROUND=false
-    restart: always
+    restart: unless-stopped
     ports:
       - "11812:11812/tcp"
       - "11812:11812/udp"
@@ -19,3 +19,8 @@ services:
       - "11813:11813/udp"
       - "2083:2083/udp"
       - "2083:2083/tcp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

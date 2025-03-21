@@ -77,7 +77,7 @@ fi
 pip3 install docker-compose
 
 #Prepare the environment
-cd /root
+#cd /root
 #git clone $REPO_URL
 # Prepare certificates
 rm -rf /root/openroaming-oss/idp/configs/freeradius/certs/*.pem

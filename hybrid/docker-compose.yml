@@ -3,6 +3,7 @@ version: '3.2'
 services:
 
   radsecproxy:
+    container_name: radsecproxy
     build:
       dockerfile: Dockerfile
       context: .
@@ -25,6 +26,7 @@ services:
         max-file: "3"
 
   mysql:
+    container_name: mysql
     image: mysql:8.0
     restart: unless-stopped
     environment:
@@ -44,6 +46,7 @@ services:
         max-file: "3"
 
   freeradius:
+    container_name: freeradius
     build:
       dockerfile: DockerfileFreeRadius
       context: .
@@ -53,6 +56,7 @@ services:
       - radsecproxy
       - mysql
     volumes:
+      - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
       - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
       - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
       - ./configs/freeradius/proxy.conf:/etc/freeradius/proxy.conf

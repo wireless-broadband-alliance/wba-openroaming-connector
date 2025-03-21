@@ -79,7 +79,7 @@ password = "admin"
 Also, make sure to install the **ufw** package with **"apt update"**, **apt upgrade"** and **"apt install ufw"**.
 
 ```bash
-for port in 11812/tcp 11812/udp 11813/tcp 11813/udp 2083/tcp 2083/udp; do sudo ufw allow $port; done
+for port in 11812/tcp 11812/udp 11813/tcp 11813/udp 2083/tcp; do sudo ufw allow $port; done
 ```
 
 After following all these steps, remember to create the containers and ensure they are working properly. Please run the following command in the terminal:
@@ -87,3 +87,7 @@ After following all these steps, remember to create the containers and ensure th
 ```bash
 docker compose up -d
 ```
+
+## 3. Connect
+In the ANP and Hybrid configuration it is assumed that you will use ports `11812` and `11813` Radius for any access points trying to authenticate. 
+For the IDP and Hybrid configurations it is assumed that you will use 2083 for IDP clients.

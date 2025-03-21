@@ -17,6 +17,8 @@ Please follow the instructions below, starting from the **root** folder of the p
         - fullchain.pem (Combination of cert.pem with chain.pem)
         - privkey.pem (Belongs to the cert.pem)
 
+Read [LETSENCRYPT](LETSENCRYPT.md) for instructions on how to automate certificate generation using Lets Encrypt.
+
 ## 2. Run the prepare-debian11.sh script:
 
 Make sure to correctly set up your credentials when running this file. After making changes and providing the required information, all variables will be overwritten, and it will only be possible to change them again manually by editing each file within **prepare-debian11.sh**.

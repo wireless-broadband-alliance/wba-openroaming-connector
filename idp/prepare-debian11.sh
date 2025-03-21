@@ -1,9 +1,10 @@
 #!/bin/bash
 REPO_URL="https://github.com/wireless-broadband-alliance/openroaming-oss.git"
 
-# Determine the base directory two levels up from this script's location
-BASE_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
+# Determine the base directory one level up from this script's location
+BASE_DIR="$(realpath "$(dirname "$0")/..")"
 CERTS_PATH="$BASE_DIR/certs"
+
 
 
 if [ "$EUID" -ne 0 ]
@@ -73,17 +74,27 @@ else
     echo "Docker is already installed. Skipping installation."
 fi
 
-#pip3 install docker-compose
+pip3 install docker-compose
 
 #Prepare the environment
 #cd /root
 #git clone $REPO_URL
+
 # Prepare certificates
+# First, make sure we're in the idp directory
+cd "$(dirname "$0")"
+
+# Clean up existing certificates
 rm -rf ./configs/freeradius/certs/*.pem
-#Prepare FreeRADIUS Certs
+
+# Prepare FreeRADIUS Certs
 cp $CERTS_PATH/freeradius/*.pem ./configs/freeradius/certs
 # ready workdir
 cd ./
+# Stop any running containers first
+docker compose down
+# Build and Start the Containers
+docker compose build --no-cache
 docker compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

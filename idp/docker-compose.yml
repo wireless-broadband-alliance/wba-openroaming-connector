@@ -22,7 +22,6 @@ services:
       context: .
     command: [ "radiusd", "-f", "-l", "/dev/stdout", "-xx" ]
     depends_on:
-      - radsecproxy
       - mysql
     volumes:
       - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize

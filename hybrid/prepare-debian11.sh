@@ -89,7 +89,7 @@ fi
 
 #Prepare the environment
 cd /root
-git clone $REPO_URL
+#git clone $REPO_URL
 # Prepare certificates
 cd /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain
 rm -rf /root/openroaming-oss/hybrid/configs/radsecproxy/certs/key.pem

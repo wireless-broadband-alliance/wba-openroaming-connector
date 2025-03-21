@@ -137,7 +137,12 @@ chown youruser:yourgroup "$DST"/*.pem
 chmod 600 "$DST"/*.pem
 
 echo "[Certbot Hook] Restarting RADIUS and RadSec services..."
-cd "$DOCKER_DIR" && docker compose down && docker compose up -d
+cd "$DOCKER_DIR"
+# Stop any running containers first
+docker compose down
+# Build and Start the Containers
+docker compose build --no-cache
+docker compose up -d
 
 echo "[Certbot Hook] Completed successfully."
 ```

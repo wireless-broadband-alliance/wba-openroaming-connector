@@ -45,8 +45,8 @@ fi
 pip3 install docker-compose
 
 #Prepare the environment
-cd /root
-git clone $REPO_URL
+#cd /root
+#git clone $REPO_URL
 # Prepare certificates
 cd /root/openroaming-oss/anp/configs/radsecproxy/certs/chain
 rm -rf /root/openroaming-oss/anp/configs/radsecproxy/certs/key.pem

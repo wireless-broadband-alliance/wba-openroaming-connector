@@ -37,8 +37,5 @@ EXPOSE 1812/udp 1813/udp 2083/tcp
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
     CMD pidof freeradius || exit 1
 
-# Use freerad user for better security
-USER freerad
-
 # Default command
 CMD ["freeradius", "-f", "-l", "stdout"]

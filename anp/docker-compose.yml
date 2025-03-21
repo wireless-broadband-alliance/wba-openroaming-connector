@@ -3,6 +3,7 @@ version: '3.2'
 services:
 
   radsecproxy:
+    container_name: radsecproxy
     build:
       dockerfile: Dockerfile
       context: .

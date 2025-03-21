@@ -85,6 +85,6 @@ rm -rf /root/openroaming-oss/idp/configs/freeradius/certs/*.pem
 cp $CERTS_PATH/freeradius/*.pem /root/openroaming-oss/idp/configs/freeradius/certs
 # ready workdir
 cd /root/openroaming-oss/idp/
-docker-compose up -d
+docker compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

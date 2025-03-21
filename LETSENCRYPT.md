@@ -137,7 +137,7 @@ chown youruser:yourgroup "$DST"/*.pem
 chmod 600 "$DST"/*.pem
 
 echo "[Certbot Hook] Restarting RADIUS and RadSec services..."
-cd "$DOCKER_DIR" && docker compose restart freeradius radsecproxy
+cd "$DOCKER_DIR" && docker compose down && docker compose up -d
 
 echo "[Certbot Hook] Completed successfully."
 ```

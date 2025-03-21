@@ -1,8 +1,8 @@
 #!/bin/bash
 REPO_URL="https://github.com/wireless-broadband-alliance/openroaming-oss.git"
 
-# Determine the base directory two levels up from this script's location
-BASE_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
+# Determine the base directory one level up from this script's location
+BASE_DIR="$(realpath "$(dirname "$0")/..")"
 CERTS_PATH="$BASE_DIR/certs"
 
 
@@ -23,6 +23,9 @@ then
     echo "Please upload your OpenRoaming certificate to $CERTS_PATH/wba/client.pem"
     exit 1
 fi
+
+# Prompt for REALM name
+read -p "Enter REALM name: " realm_name
 read -p "Enter the client CIDR (default: 0.0.0.0/0): " client_cidr
 client_cidr=${client_cidr:-0.0.0.0/0}
 read -p "Enter the client secret (default: radsec): " client_secret
@@ -44,20 +47,31 @@ fi
 #Prepare the environment
 #cd /root
 #git clone $REPO_URL
+
 # Prepare certificates
-cd ./configs/radsecproxy/certs/chain
+# First, make sure we're in the anp directory
+cd "$(dirname "$0")"
+
+# Clean up existing certificates
 rm -rf ./configs/radsecproxy/certs/key.pem
 rm -rf ./configs/radsecproxy/certs/client.pem
 rm -rf ./configs/radsecproxy/certs/chain.pem
-#Prepare RadSec Certs
+
+# Prepare RadSec Certs
 cp $CERTS_PATH/wba/key.pem ./configs/radsecproxy/certs/key.pem
 cp $CERTS_PATH/wba/client.pem ./configs/radsecproxy/certs/client.pem
 cat ./configs/radsecproxy/certs/client.pem ./configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem ./configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem > ./configs/radsecproxy/certs/chain.pem
+
+# Update configuration files
 sed -i "s/-RNAME-/${realm_name//./\\.}/g" ./configs/radsecproxy/radsecproxy.conf
 sed -i "s|-RCLIENT-|${client_cidr}|g" ./configs/radsecproxy/radsecproxy.conf
 sed -i "s/-RSECRET-/${client_secret}/g" ./configs/radsecproxy/radsecproxy.conf
-# ready workdir
-cd ./
+
+# Start the containers
+# Stop any running containers first
+docker compose down
+# Build and Start the Containers
+docker compose build --no-cache
 docker compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

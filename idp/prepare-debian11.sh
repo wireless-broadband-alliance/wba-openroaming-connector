@@ -57,8 +57,8 @@ MYSQL_PASSWORD=${MYSQL_PASSWORD}
 EOL
 
 # Replace placeholders in the sql file
-sed -i "s/-RSQLUSER-/${MYSQL_USER}/g" /root/openroaming-oss/idp/configs/freeradius/mods-available/sql
-sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" /root/openroaming-oss/idp/configs/freeradius/mods-available/sql
+sed -i "s/-RSQLUSER-/${MYSQL_USER}/g" ./configs/freeradius/mods-available/sql
+sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" ./configs/freeradius/mods-available/sql
 
 # Install dependencies
 apt-get update -y
@@ -79,11 +79,11 @@ pip3 install docker-compose
 #cd /root
 #git clone $REPO_URL
 # Prepare certificates
-rm -rf /root/openroaming-oss/idp/configs/freeradius/certs/*.pem
+rm -rf ./configs/freeradius/certs/*.pem
 #Prepare FreeRADIUS Certs
-cp $CERTS_PATH/freeradius/*.pem /root/openroaming-oss/idp/configs/freeradius/certs
+cp $CERTS_PATH/freeradius/*.pem ./configs/freeradius/certs
 # ready workdir
-cd /root/openroaming-oss/idp/
+cd ./
 docker compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

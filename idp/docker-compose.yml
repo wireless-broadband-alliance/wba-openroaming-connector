@@ -4,6 +4,7 @@ services:
 
   mysql:
     image: mysql:8.0
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: radius
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -14,12 +15,17 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./configs/mysql/schema/freeradius.sql:/docker-entrypoint-initdb.d/freeradius.sql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   freeradius:
-    restart: always
     build:
       dockerfile: DockerfileFreeRadius
       context: .
+    restart: unless-stopped
     command: [ "radiusd", "-f", "-l", "/dev/stdout", "-xx" ]
     depends_on:
       - mysql
@@ -27,7 +33,11 @@ services:
       - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
       - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
       - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
-    #    command:
-    #      - -X
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 volumes:
   mysql_data:

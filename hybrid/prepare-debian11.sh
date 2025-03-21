@@ -88,7 +88,7 @@ else
 fi
 
 #Prepare the environment
-cd /root
+#cd /root
 #git clone $REPO_URL
 # Prepare certificates
 cd /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain

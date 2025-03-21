@@ -90,4 +90,4 @@ docker compose up -d
 
 ## 3. Connect
 In the ANP and Hybrid configuration it is assumed that you will use ports `11812` and `11813` Radius for any access points trying to authenticate. 
-For the IDP and Hybrid configurations it is assumed that you will use 2083 for IDP clients.
+For the IDP and Hybrid configurations it is assumed that you will use `2083` for IDP clients.

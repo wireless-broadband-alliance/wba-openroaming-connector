@@ -73,7 +73,7 @@ else
     echo "Docker is already installed. Skipping installation."
 fi
 
-pip3 install docker-compose
+#pip3 install docker-compose
 
 #Prepare the environment
 #cd /root

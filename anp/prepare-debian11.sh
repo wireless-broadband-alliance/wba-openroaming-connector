@@ -41,8 +41,6 @@ else
     echo "Docker is already installed. Skipping installation."
 fi
 
-pip3 install docker-compose
-
 #Prepare the environment
 #cd /root
 #git clone $REPO_URL
@@ -60,6 +58,6 @@ sed -i "s|-RCLIENT-|${client_cidr}|g" ./configs/radsecproxy/radsecproxy.conf
 sed -i "s/-RSECRET-/${client_secret}/g" ./configs/radsecproxy/radsecproxy.conf
 # ready workdir
 cd ./
-docker-compose up -d
+docker compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

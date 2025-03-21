@@ -60,8 +60,7 @@ realm example.com {
 }
 ```
 
-5. Go to the **sql** file and edit the following credentials section, to let the freeradius know what is the name of the
-   docker container and the credentials of the mysql user to be able to edit the radius table.
+5. If you're running **hybrid** or **idp** Go to the `freeradius/mods-available/sql` file and edit the following credentials section, to let the freeradius know what is the name of the docker container and the credentials of the mysql user to be able to edit the radius table.
 
 ```yaml
 server = "hybrid_mysql_1"
@@ -69,6 +68,7 @@ port = 3306
 login = "root"
 password = "admin"
 ```
+
 **Note**: For server property please define the name of the container of the IP of the current machine
 
 6. Next you have to enable the ports being used by the containers on your machine. For Ubuntu server systems, you can

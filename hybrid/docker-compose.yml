@@ -55,6 +55,8 @@ services:
     volumes:
       - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
       - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
+      - ./configs/freeradius/proxy.conf:/etc/freeradius/proxy.conf
+      - ./configs/freeradius/clients.conf:/etc/freeradius/clients.conf
     logging:
       driver: "json-file"
       options:

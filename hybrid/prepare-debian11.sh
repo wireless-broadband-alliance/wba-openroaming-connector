@@ -1,9 +1,4 @@
 #!/bin/bash
-# This script is meant for quick & easy install via:
-#   $ curl -fsSL https://raw.githubusercontent.com/wireless-broadband-alliance/openroaming-oss/main/prepare-debian11.sh -o prepare-debian11.sh
-#   $ chmod +x prepare-debian11.sh
-#   $ ./prepare-debian11.sh
-
 REPO_URL="https://github.com/wireless-broadband-alliance/openroaming-oss.git"
 
 # Determine the base directory two levels up from this script's location

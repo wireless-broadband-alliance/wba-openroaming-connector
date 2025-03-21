@@ -5,7 +5,11 @@
 #   $ ./prepare-debian11.sh
 
 REPO_URL="https://github.com/wireless-broadband-alliance/openroaming-oss.git"
-CERTS_PATH="/root/openroaming-oss/certs"
+
+# Determine the base directory two levels up from this script's location
+BASE_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
+CERTS_PATH="$BASE_DIR/certs"
+
 
 if [ "$EUID" -ne 0 ]
   then echo "You must run this script as root, you can either sudo the script directly or become root with a command such as 'sudo su'"

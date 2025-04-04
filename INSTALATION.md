@@ -139,7 +139,7 @@ docker ps
 CONTAINER ID   IMAGE                 COMMAND                  STATUS         PORTS                                         NAMES
 642d2a23f456   hybrid-freeradius     "/docker-entrypoint.…"   Up 5 minutes   1812-1813/udp                                hybrid-freeradius-1
 8f250ad4a907   hybrid-radsecproxy    "/sbin/tini -- /root…"   Up 5 minutes   0.0.0.0:2083->2083/tcp, 11812-11813/tcp      hybrid-radsecproxy-1
-4cc3b65c2a51   mysql:8.0             "docker-entrypoint.s…"   Up 5 minutes   0.0.0.0:3307->3306/tcp                       hybrid-mysql_freeradius-1
+4cc3b65c2a51   mysql:8.0             "docker-entrypoint.s…"   Up 5 minutes   0.0.0.0:3306->3306/tcp                       hybrid-mysql_freeradius-1
 ```
 
 ---

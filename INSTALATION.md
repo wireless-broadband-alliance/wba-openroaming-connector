@@ -1,4 +1,4 @@
-# Installation for Local FreeRADIUS
+# Installation Guide
 
 This guide is designed to help you set up a clean local installation for FreeRADIUS. Follow the steps carefully to ensure a proper and functional setup.  
 This project is specifically designed to be executed in the root folder of **Debian-based systems**. Running it outside the root folder or on non-Debian systems will be blocked due to missing permissions or capabilities for a proper configuration.

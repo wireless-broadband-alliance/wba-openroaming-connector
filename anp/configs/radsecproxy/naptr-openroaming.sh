@@ -17,7 +17,6 @@ test -n "${1}" || usage
 DIGCMD=$(command -v dig)
 HOSTCMD=$(command -v host)
 PRINTCMD=$(command -v printf)
-GREPCMD=$(command -v grep)
 
 validate_host() {
          echo ${@} | tr -d '\n\t\r' | grep -E '^[_0-9a-zA-Z][-._0-9a-zA-Z]*$'
@@ -80,9 +79,9 @@ if [ -z "${ORIG_REALM}" ]; then
 fi
 
 # for 3gppnetwork we have to do some messing about
-if echo "${ORIG_REALM}" |${GREPCMD} -Eq '.(\.pub\.3gppnetwork\.org)$' ; then
+if echo "${ORIG_REALM}" |grep -Eq '.(\.pub\.3gppnetwork\.org)$' ; then
     REALM="${ORIG_REALM}"
-elif echo "${ORIG_REALM}" |${GREPCMD} -Eq '.(\.3gppnetwork\.org)$' ; then
+elif echo "${ORIG_REALM}" |grep -Eq '.(\.3gppnetwork\.org)$' ; then
     REALM=$(validate_3gppnetwork "${ORIG_REALM}")
 else
     REALM="${ORIG_REALM}"

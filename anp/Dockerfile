@@ -1,15 +1,16 @@
 # Multi-stage build for radsecproxy for WBA OpenRoaming Connector (ANP Mode)
 # Based on Alpine Linux for minimal image size
+# From https://github.com/bgernert/docker-radsecproxy/blob/master/Dockerfile
 
 # Build stage
-FROM alpine:3.19 as build
+FROM alpine:3.22.0 as build
 
 # Metadata
 LABEL maintainer="WBA OpenRoaming Team"
 LABEL description="Build stage for radsecproxy"
 
 # Environment variables
-ENV RADSECVERSION=1.9.1
+ENV RADSECVERSION=1.11.2
 ENV RADSECURL=https://github.com/radsecproxy/radsecproxy/releases/download/${RADSECVERSION}/
 ENV RADSECFILENAME=radsecproxy-${RADSECVERSION}.tar.gz
 
@@ -37,22 +38,24 @@ RUN ./configure --prefix=/root/output --sysconfdir=/etc && \
     make && \
     make install
 
-# Final stage
-FROM alpine:3.19
+# Final stage - Create Radsecproxy container
+FROM alpine:3.22.0
 
 # Metadata
 LABEL maintainer="WBA OpenRoaming Team"
 LABEL description="Radsecproxy for WBA OpenRoaming ANP Mode"
 LABEL version="1.0"
 
-# Install runtime dependencies
-RUN apk add --no-cache --update \
+# Update apk and install runtime dependencies
+RUN apk update && \
+    apk add --no-cache \
     openssl \
     ca-certificates \
     bash \
     nettle \
     tini \
-    bind-tools
+    bind-tools \
+    grep
 
 # Copy built files from build stage
 COPY --from=build /root/output/ /

@@ -1,10 +1,14 @@
 #!/bin/bash
-REPO_URL="https://github.com/wireless-broadband-alliance/openroaming-oss.git"
+# This script is meant for quick & easy install via:
+#   $ curl -fsSL https://raw.githubusercontent.com/wireless-broadband-alliance/wba-openroaming-connector/main/prepare-debian11.sh -o prepare-debian11.sh
+#   $ chmod +x prepare-debian11.sh
+#   $ ./prepare-debian11.sh
+
+REPO_URL="https://github.com/wireless-broadband-alliance/wba-openroaming-connector.git"
 
 # Determine the base directory one level up from this script's location
 BASE_DIR="$(realpath "$(dirname "$0")/..")"
 CERTS_PATH="$BASE_DIR/certs"
-
 
 if [ "$EUID" -ne 0 ]
   then echo "You must run this script as root, you can either sudo the script directly or become root with a command such as 'sudo su'"
@@ -102,7 +106,7 @@ rm -rf ./configs/freeradius/certs/*.pem
 # Prepare RadSec Certs
 cp $CERTS_PATH/wba/key.pem ./configs/radsecproxy/certs/key.pem
 cp $CERTS_PATH/wba/client.pem ./configs/radsecproxy/certs/client.pem
-cat ./configs/radsecproxy/certs/client.pem ./configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem ./configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem > ./configs/radsecproxy/certs/chain.pem
+cat ./configs/radsecproxy/certs/client.pem ./configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem ./configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem ./configs/radsecproxy/certs/chain/WBA_Issuing7_CA.pem ./configs/radsecproxy/certs/chain/WBA_Policy7_CA.pem > ./configs/radsecproxy/certs/chain.pem
 
 # Update configuration files
 sed -i "s/-RNAME-/${realm_name//./\\.}/g" ./configs/radsecproxy/radsecproxy.conf

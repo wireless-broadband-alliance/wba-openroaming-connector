@@ -1,10 +1,10 @@
-# FreeRADIUS Dockerfile for WBA OpenRoaming Connector (Hybrid Mode)
-# Based on freeradius/freeradius-server but configured for OpenRoaming IDP
+# FreeRADIUS Dockerfile for WBA OpenRoaming Connector (IDP Mode)
+# Based on freeradius/freeradius-server but with improved best practices
 
 FROM freeradius/freeradius-server:3.2.1
 
 LABEL maintainer="WBA OpenRoaming Team"
-LABEL description="FreeRADIUS server configured for WBA OpenRoaming Hybrid Mode"
+LABEL description="FreeRADIUS server configured for WBA OpenRoaming IDP Mode"
 LABEL version="1.0"
 
 # Set working directory

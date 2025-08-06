@@ -13,6 +13,8 @@ This project is specifically designed to be executed in the root folder of **Deb
 
 ## Get Started
 
+Read [LETSENCRYPT](LETSENCRYPT.md) for instructions on how to automate certificate generation using Lets Encrypt.
+
 Begin by preparing the system using the provided configuration script: **`prepare-debian11.sh`**.  
 It configures FreeRADIUS by performing key steps such as installing dependencies, validating required certificates, and preparing the necessary configurations for deployment. This ensures a smooth and consistent installation process.
 
@@ -55,7 +57,18 @@ To begin, clone the project repository or download it directly from the official
    MYSQL_PASSWORD=your_password
    ```
 
-6. Save the file and ensure it remains in the project’s root directory.
+6. If you're running **hybrid** or **idp** Go to the `freeradius/mods-available/sql` file and edit the following credentials section, to let the freeradius know what is the name of the docker container and the credentials of the mysql user to be able to edit the radius table.
+
+```yaml
+server = "hybrid_mysql_1"
+port = 3306
+login = "root"
+password = "admin"
+```
+
+**Note**: For server property please define the name of the container of the IP of the current machine
+
+7. Save the file and ensure it remains in the project's root directory.
 
 ---
 
@@ -84,7 +97,7 @@ Ensure the following requirements are met before starting the installation proce
    - `/root/openroaming-oss/certs/wba/client.pem`: Your OpenRoaming certificate.
 
    **FreeRADIUS Certificates**:
-   - `/root/openroaming-oss/certs/freeradius/cert.pem`: FreeRADIUS certificate (e.g., Let’s Encrypt certificate).
+   - `/root/openroaming-oss/certs/freeradius/cert.pem`: FreeRADIUS certificate (e.g., Let's Encrypt certificate).
    - `/root/openroaming-oss/certs/freeradius/chain.pem`: FreeRADIUS chain file.
    - `/root/openroaming-oss/certs/freeradius/fullchain.pem`: FreeRADIUS full chain file.
    - `/root/openroaming-oss/certs/freeradius/privkey.pem`: FreeRADIUS private key.
@@ -158,6 +171,10 @@ CONTAINER ID   IMAGE                 COMMAND                  STATUS         POR
 - **Status**: Confirm all containers display **Up** in the status field.
 
 ---
+
+## 3. Connect
+In the ANP and Hybrid configuration it is assumed that you will use ports `11812` and `11813` Radius for any access points trying to authenticate. 
+For the IDP and Hybrid configurations it is assumed that you will use `2083` for IDP clients.
 
 ### Final Steps
 

@@ -3,6 +3,7 @@ version: '3.2'
 services:
 
   radsecproxy:
+    container_name: radsecproxy
     build:
       dockerfile: Dockerfile
       context: .
@@ -11,11 +12,15 @@ services:
       - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
     environment:
       - RUN_IN_BACKGROUND=false
-    restart: always
+    restart: unless-stopped
     ports:
       - "11812:11812/tcp"
       - "11812:11812/udp"
       - "11813:11813/tcp"
       - "11813:11813/udp"
-      - "2083:2083/udp"
       - "2083:2083/tcp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

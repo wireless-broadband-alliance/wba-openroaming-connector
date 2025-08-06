@@ -3,6 +3,7 @@ version: '3.2'
 services:
 
   radsecproxy:
+    container_name: radsecproxy
     build:
       dockerfile: Dockerfile
       context: .
@@ -11,17 +12,23 @@ services:
       - "./configs/radsecproxy/certs:/etc/radsecproxy/certs"
     environment:
       - RUN_IN_BACKGROUND=false
-    restart: always
+    restart: unless-stopped
     ports:
       - "11812:11812/tcp"
       - "11812:11812/udp"
       - "11813:11813/tcp"
       - "11813:11813/udp"
-      - "2083:2083/udp"
       - "2083:2083/tcp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   mysql:
+    container_name: mysql
     image: mysql:8.0
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: radius
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -32,18 +39,33 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./configs/mysql/schema/freeradius.sql:/docker-entrypoint-initdb.d/freeradius.sql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   freeradius:
-    restart: always
+    container_name: freeradius
     build:
       dockerfile: DockerfileFreeRadius
       context: .
+    restart: unless-stopped
     command: [ "radiusd", "-f", "-l", "/dev/stdout", "-xx" ]
     depends_on:
       - radsecproxy
       - mysql
     volumes:
+      - ./configs/freeradius/mods-config/files/authorize:/etc/freeradius/mods-config/files/authorize
       - ./configs/freeradius/mods-available/sql:/etc/freeradius/mods-enabled/sql
       - ./configs/freeradius/mods-available/eap:/etc/freeradius/mods-enabled/eap
+      - ./configs/freeradius/proxy.conf:/etc/freeradius/proxy.conf
+      - ./configs/freeradius/clients.conf:/etc/freeradius/clients.conf
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 volumes:
   mysql_data:

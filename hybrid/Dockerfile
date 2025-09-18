@@ -1,11 +1,11 @@
 #From https://github.com/bgernert/docker-radsecproxy/blob/master/Dockerfile
 # Use official Alpine release
-FROM alpine:3.14.3 as build
+FROM alpine:3.22.0 as build
 
 # Maintainer
 LABEL maintainer="Björn Gernert <mail@bjoern-gernert.de>"
 
-ENV RADSECVERSION 1.9.1
+ENV RADSECVERSION 1.11.2
 ENV RADSECURL https://github.com/radsecproxy/radsecproxy/releases/download/${RADSECVERSION}/
 ENV RADSECFILENAME radsecproxy-${RADSECVERSION}.tar.gz
 
@@ -36,13 +36,13 @@ RUN make && make install
 # --- --- ---
 
 # Create Radsecproxy container
-FROM alpine:3.14.3
+FROM alpine:3.22.0
 
 # Update apk
 RUN apk update
 
 # Install openssl, ca-certificates, nettle and tini
-RUN apk add --no-cache openssl ca-certificates bash nettle tini bind-tools
+RUN apk add --no-cache openssl ca-certificates bash nettle tini bind-tools grep
 
 # Copy from 'build' stage
 COPY --from=build /root/output/ /

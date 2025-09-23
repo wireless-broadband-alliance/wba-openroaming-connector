@@ -1,11 +1,11 @@
 #!/bin/bash
 # This script is meant for quick & easy install via:
-#   $ curl -fsSL https://raw.githubusercontent.com/wireless-broadband-alliance/openroaming-oss/main/prepare-debian11.sh -o prepare-debian11.sh
+#   $ curl -fsSL https://raw.githubusercontent.com/wireless-broadband-alliance/wba-openroaming-connector/main/prepare-debian11.sh -o prepare-debian11.sh
 #   $ chmod +x prepare-debian11.sh
 #   $ ./prepare-debian11.sh
 
-REPO_URL="https://github.com/wireless-broadband-alliance/openroaming-oss.git"
-CERTS_PATH="/root/openroaming-oss/certs"
+REPO_URL="https://github.com/wireless-broadband-alliance/wba-openroaming-connector.git"
+CERTS_PATH="/root/wba-openroaming-connector/certs"
 
 if [ "$EUID" -ne 0 ]
   then echo "You must run this script as root, you can either sudo the script directly or become root with a command such as 'sudo su'"
@@ -58,8 +58,8 @@ MYSQL_PASSWORD=${MYSQL_PASSWORD}
 EOL
 
 # Replace placeholders in the sql file
-sed -i "s/-RSQLUSER-/${MYSQL_USER}/g" /root/openroaming-oss/idp/configs/freeradius/mods-available/sql
-sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" /root/openroaming-oss/idp/configs/freeradius/mods-available/sql
+sed -i "s/-RSQLUSER-/${MYSQL_USER}/g" /root/wba-openroaming-connector/idp/configs/freeradius/mods-available/sql
+sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" /root/wba-openroaming-connector/idp/configs/freeradius/mods-available/sql
 
 # Install dependencies
 apt-get update -y
@@ -80,11 +80,11 @@ pip3 install docker-compose
 cd /root
 git clone $REPO_URL
 # Prepare certificates
-rm -rf /root/openroaming-oss/idp/configs/freeradius/certs/*.pem
+rm -rf /root/wba-openroaming-connector/idp/configs/freeradius/certs/*.pem
 #Prepare FreeRADIUS Certs
-cp $CERTS_PATH/freeradius/*.pem /root/openroaming-oss/idp/configs/freeradius/certs
+cp $CERTS_PATH/freeradius/*.pem /root/wba-openroaming-connector/idp/configs/freeradius/certs
 # ready workdir
-cd /root/openroaming-oss/idp/
+cd /root/wba-openroaming-connector/idp/
 docker-compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

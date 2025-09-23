@@ -1,11 +1,11 @@
 #!/bin/bash
 # This script is meant for quick & easy install via:
-#   $ curl -fsSL https://raw.githubusercontent.com/wireless-broadband-alliance/openroaming-oss/main/prepare-debian11.sh -o prepare-debian11.sh
+#   $ curl -fsSL https://raw.githubusercontent.com/wireless-broadband-alliance/wba-openroaming-connector/main/prepare-debian11.sh -o prepare-debian11.sh
 #   $ chmod +x prepare-debian11.sh
 #   $ ./prepare-debian11.sh
 
-REPO_URL="https://github.com/wireless-broadband-alliance/openroaming-oss.git"
-CERTS_PATH="/root/openroaming-oss/certs"
+REPO_URL="https://github.com/wireless-broadband-alliance/wba-openroaming-connector.git"
+CERTS_PATH="/root/wba-openroaming-connector/certs"
 
 if [ "$EUID" -ne 0 ]
   then echo "You must run this script as root, you can either sudo the script directly or become root with a command such as 'sudo su'"
@@ -71,8 +71,8 @@ MYSQL_PASSWORD=${MYSQL_PASSWORD}
 EOL
 
 # Replace placeholders in the sql file
-sed -i "s/-RSQLUSER-/${MYSQL_USER}/g" /root/openroaming-oss/hybrid/configs/freeradius/mods-available/sql
-sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" /root/openroaming-oss/hybrid/configs/freeradius/mods-available/sql
+sed -i "s/-RSQLUSER-/${MYSQL_USER}/g" /root/wba-openroaming-connector/hybrid/configs/freeradius/mods-available/sql
+sed -i "s/-RSQLPASS-/${MYSQL_PASSWORD}/g" /root/wba-openroaming-connector/hybrid/configs/freeradius/mods-available/sql
 
 # Install dependencies
 apt-get update -y
@@ -91,23 +91,23 @@ fi
 cd /root
 git clone $REPO_URL
 # Prepare certificates
-cd /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain
-rm -rf /root/openroaming-oss/hybrid/configs/radsecproxy/certs/key.pem
-rm -rf /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem
-rm -rf /root/openroaming-oss/hybrid/chybridonfigs/radsecproxy/certs/chain.pem
-rm -rf /root/openroaming-oss/hybrid/configs/freeradius/certs/*.pem
+cd /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/chain
+rm -rf /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/key.pem
+rm -rf /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/client.pem
+rm -rf /root/wba-openroaming-connector/hybrid/chybridonfigs/radsecproxy/certs/chain.pem
+rm -rf /root/wba-openroaming-connector/hybrid/configs/freeradius/certs/*.pem
 #Prepare RadSec Certs
-cp $CERTS_PATH/wba/key.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/key.pem
-cp $CERTS_PATH/wba/client.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem
-cat /root/openroaming-oss/hybrid/configs/radsecproxy/certs/client.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem > /root/openroaming-oss/hybrid/configs/radsecproxy/certs/chain.pem
-sed -i "s/-RNAME-/${realm_name//./\\.}/g" /root/openroaming-oss/hybrid/configs/radsecproxy/radsecproxy.conf
-sed -i "s/-RNAME-/${realm_name//./\\.}/g" /root/openroaming-oss/hybrid/configs/freeradius/proxy.conf
-sed -i "s|-RCLIENT-|${client_cidr}|g" /root/openroaming-oss/hybrid/configs/radsecproxy/radsecproxy.conf
-sed -i "s/-RSECRET-/${client_secret}/g" /root/openroaming-oss/hybrid/configs/radsecproxy/radsecproxy.conf
+cp $CERTS_PATH/wba/key.pem /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/key.pem
+cp $CERTS_PATH/wba/client.pem /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/client.pem
+cat /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/client.pem /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/chain/WBA_Issuing_CA.pem /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/chain/WBA_Cisco_Policy_CA.pem /root/wba-openroaming-connector/anp/configs/radsecproxy/certs/chain/WBA_Issuing7_CA.pem /root/wba-openroaming-connector/anp/configs/radsecproxy/certs/chain/WBA_Policy7_CA.pem > /root/wba-openroaming-connector/hybrid/configs/radsecproxy/certs/chain.pem
+sed -i "s/-RNAME-/${realm_name//./\\.}/g" /root/wba-openroaming-connector/hybrid/configs/radsecproxy/radsecproxy.conf
+sed -i "s/-RNAME-/${realm_name//./\\.}/g" /root/wba-openroaming-connector/hybrid/configs/freeradius/proxy.conf
+sed -i "s|-RCLIENT-|${client_cidr}|g" /root/wba-openroaming-connector/hybrid/configs/radsecproxy/radsecproxy.conf
+sed -i "s/-RSECRET-/${client_secret}/g" /root/wba-openroaming-connector/hybrid/configs/radsecproxy/radsecproxy.conf
 #Prepare FreeRADIUS Certs
-cp $CERTS_PATH/freeradius/*.pem /root/openroaming-oss/hybrid/configs/freeradius/certs
+cp $CERTS_PATH/freeradius/*.pem /root/wba-openroaming-connector/hybrid/configs/freeradius/certs
 # ready workdir
-cd /root/openroaming-oss/hybrid/
+cd /root/wba-openroaming-connector/hybrid/
 docker compose up -d
 
 echo "Reminder: Make sure UDP ports 11812 and 11813 are open on your firewall (on your cloud provider if applicable), refer to the documentation for more details"

@@ -34,7 +34,7 @@ To begin, clone the project repository or download it directly from the official
 #### Steps to Retrieve the Project:
 1. **Clone via Git**:
    ```bash
-   git clone https://github.com/wireless-broadband-alliance/openroaming-oss.git
+   git clone https://github.com/wireless-broadband-alliance/wba-openroaming-connector.git
    ```
 
 2. **Download as a ZIP file**:
@@ -80,14 +80,14 @@ Ensure the following requirements are met before starting the installation proce
    - Make sure the necessary certificates and keys are placed in their respective paths:
 
    **WBA Certificates**:
-   - `/root/openroaming-oss/certs/wba/key.pem`: Your certificate private key.
-   - `/root/openroaming-oss/certs/wba/client.pem`: Your OpenRoaming certificate.
+   - `/root/wba-openroaming-connector/certs/wba/key.pem`: Your certificate private key.
+   - `/root/wba-openroaming-connector/certs/wba/client.pem`: Your OpenRoaming certificate.
 
    **FreeRADIUS Certificates**:
-   - `/root/openroaming-oss/certs/freeradius/cert.pem`: FreeRADIUS certificate (e.g., Let’s Encrypt certificate).
-   - `/root/openroaming-oss/certs/freeradius/chain.pem`: FreeRADIUS chain file.
-   - `/root/openroaming-oss/certs/freeradius/fullchain.pem`: FreeRADIUS full chain file.
-   - `/root/openroaming-oss/certs/freeradius/privkey.pem`: FreeRADIUS private key.
+   - `/root/wba-openroaming-connector/certs/freeradius/cert.pem`: FreeRADIUS certificate (e.g., Let’s Encrypt certificate).
+   - `/root/wba-openroaming-connector/certs/freeradius/chain.pem`: FreeRADIUS chain file.
+   - `/root/wba-openroaming-connector/certs/freeradius/fullchain.pem`: FreeRADIUS full chain file.
+   - `/root/wba-openroaming-connector/certs/freeradius/privkey.pem`: FreeRADIUS private key.
 
 #### Note:
 Failing to provide these files in the correct locations will cause the installation process to halt.
@@ -101,7 +101,7 @@ After meeting the requirements, execute the **`prepare-debian11.sh`** script to 
 #### How to Run the Script:
 1. Make sure you are in the root folder of the project:
    ```bash
-   cd ~/openroaming-oss/hybrid
+   cd ~/wba-openroaming-connector/hybrid
    ```
 
 2. Execute the script:
@@ -111,7 +111,7 @@ After meeting the requirements, execute the **`prepare-debian11.sh`** script to 
 
 #### Example:
 ```bash
-root@tetrapi-XPS-15-7590:~/openroaming-oss/hybrid# ./prepare-debian11.sh
+root@tetrapi-XPS-15-7590:~/wba-openroaming-connector/hybrid# ./prepare-debian11.sh
 ```
 
 ---
@@ -121,7 +121,7 @@ root@tetrapi-XPS-15-7590:~/openroaming-oss/hybrid# ./prepare-debian11.sh
 - If interrupted or rerunning is required, ensure:
    - The environment is cleaned.
    - Certificates are correctly placed.
-- The script validates the presence of all required certificates in `/root/openroaming-oss/certs`.
+- The script validates the presence of all required certificates in `/root/wba-openroaming-connector/certs`.
 
 ---
 
